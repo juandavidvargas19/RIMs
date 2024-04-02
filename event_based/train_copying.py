@@ -171,7 +171,7 @@ if args.algo == "blocks":
                             layer_dilation=args.layer_dilation, num_modules_read_input=args.read_input).to(device)
 elif args.algo == "lstm":
     rnn_mod = baseline_lstm_model_adding.RNNModel
-    model = rnn_mod(args.model, ntokens, out_dim, args.emsize, args.nhid,
+    model = rnn_mod(args.model, inp_dim, out_dim, args.emsize, args.nhid,
                             args.nlayers, args.dropout, args.tied,
                             use_cudnn_version=args.cudnn,
                             use_adaptive_softmax=args.adaptivesoftmax, cutoffs=args.cutoffs).to(device)
