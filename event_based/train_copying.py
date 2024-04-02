@@ -170,7 +170,7 @@ if args.algo == "blocks":
                             blocked_grad=args.blocked_grad, block_dilation=args.block_dilation,
                             layer_dilation=args.layer_dilation, num_modules_read_input=args.read_input).to(device)
 elif args.algo == "lstm":
-    rnn_mod = baseline_lstm_model_adding.RNNModel
+    rnn_mod = baseline_lstm_model.RNNModel
     model = rnn_mod(args.model, 'LSTM',ntokens, out_dim, args.emsize, args.nhid,
                             args.nlayers, args.dropout, args.tied,
                             use_cudnn_version=args.cudnn,
