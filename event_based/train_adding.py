@@ -224,7 +224,7 @@ def evaluate(split):
     # Turn on evaluation mode which disables dropout.
     model.eval()
     calc_mask=False
-    if split is "Val":
+    if split == "Val":
         data_source = val_loader
     else:
         data_source = test_loader
@@ -253,7 +253,7 @@ def evaluate(split):
 
     total_loss /= len(data_source.dataset)
 
-    if split is "Val":
+    if split == "Val":
         if args.scheduler:
             scheduler.step(total_loss)
 
