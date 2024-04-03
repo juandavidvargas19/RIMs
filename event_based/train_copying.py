@@ -334,7 +334,7 @@ def train(epoch):
         forward_elapsed = time.time() - forward_start_time
         forward_elapsed_time += forward_elapsed
 
-        if args.algo='blocks'
+        if args.algo=='blocks'
             (loss + extra_loss).backward()
         else:
             loss.backward()
