@@ -316,7 +316,7 @@ def train(epoch):
 
         optimizer.step()
 
-        if batch % args.log_interval == 0 and batch > 0:
+        if batch % args.log_interval == 0 and batch > 0 and batch % 4 == 0:
             cur_loss = total_loss / args.log_interval
             elapsed = time.time() - start_time
             printlog = '| epoch {:3d} | {:5d}/{:5d} batches | lr {:02.5f} | ms/batch {:5.2f} | forward ms/batch {:5.2f} | loss {:5.2f} | ppl {:8.2f}'.format(
