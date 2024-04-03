@@ -173,8 +173,7 @@ if args.algo == "blocks":
 elif args.algo == "lstm":
     rnn_mod = baseline_lstm_model.RNNModel
     model = rnn_mod(args.model, 'LSTM',ntokens, out_dim, args.emsize, args.nhid,
-                            args.nlayers, args.dropout, args.tied,
-                            use_adaptive_softmax=args.adaptivesoftmax, cutoffs=args.cutoffs).to(device)
+                            args.nlayers, args.dropout, args.tied).to(device)
 else:
     raise Exception("Algorithm option not found")
 
