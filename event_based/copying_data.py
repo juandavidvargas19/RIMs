@@ -2,7 +2,15 @@ import numpy
 import torch
 from torch.utils import data
 
-def copying_data(T=30, n_data=300*64, n_sequence=10, batch_size=64, make_rand=False, shuffle=False, drop_last=False):
+
+T = 80
+n_train = 700
+n_test = 700
+n_sequence = 10
+batch_size = 70
+
+
+def copying_data(T=30, n_data=300*batch_size, n_sequence=10, batch_size=batch_size, make_rand=False, shuffle=False, drop_last=False):
     seq = numpy.random.randint(1, high=9, size=(n_data, n_sequence))
     zeros1 = numpy.zeros((n_data, T-1))
     zeros2 = numpy.zeros((n_data, T))
@@ -59,11 +67,6 @@ def copying_dataset(sizes, seq_lens, batch_size):
     return train_loader, val_loader, test_loader
 
 
-T = 80
-n_train = 640
-n_test = 640
-n_sequence = 10
-batch_size = 64
 
 if __name__ == "__main__":
     train_x, train_y = copying_data(T, n_train, n_sequence,batch_size,make_rand=True)
