@@ -32,7 +32,7 @@ class RNNModel(nn.Module):
         self.decoder.bias.data.zero_()
         self.decoder.weight.data.uniform_(-initrange, initrange)
 
-    def forward(self, input, hidden):
+    def forward(self, input, hidden,calc_mask=False):
         emb = self.drop(self.encoder(input))
         output, hidden = self.lstm(emb, hidden)
         output = self.drop(output)
