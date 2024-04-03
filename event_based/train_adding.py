@@ -129,6 +129,8 @@ if torch.cuda.is_available():
 
 device = torch.device("cuda" if args.cuda else "cpu")
 
+args.cuda = args.cuda and torch.cuda.is_available()
+
 # Get Data Loaders
 train_loader, val_loader, test_loader = adding_dataset(sizes, lens, args.batch_size)
 
@@ -278,7 +280,8 @@ def train(epoch):
         model.train()
 
         # synchronize cuda for a proper speed benchmark
-        torch.cuda.synchronize()
+        if args.cuda:
+            torch.cuda.synchronize()
 
         forward_start_time = time.time()
         model.zero_grad()
@@ -300,7 +303,8 @@ def train(epoch):
         total_loss += loss.item()
 
         # synchronize cuda for a proper speed benchmark
-        torch.cuda.synchronize()
+        if args.cuda:
+            torch.cuda.synchronize()
 
         forward_elapsed = time.time() - forward_start_time
         forward_elapsed_time += forward_elapsed
