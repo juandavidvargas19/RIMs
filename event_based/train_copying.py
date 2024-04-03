@@ -114,6 +114,7 @@ print("Tied?", args.tied)
 
 
 args.cuda = args.cuda and torch.cuda.is_available()
+args.cudnn= args.algo =='lstm'
 
 device = torch.device("cuda" if args.cuda else "cpu")
 
