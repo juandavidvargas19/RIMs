@@ -175,7 +175,7 @@ elif args.algo == "lstm":
     
     rnn_mod = baseline_lstm_model.RNNModel    
     dropout_value = args.dropout[0] if isinstance(args.dropout, list) else args.dropout
-    model = rnn_mod(args.model, ntokens, args.emsize, args.nhid, args.nlayers, dropout_value, args.tied).to(device)
+    model = rnn_mod( ntokens, args.emsize, args.nhid, args.nlayers, dropout_value, args.tied).to(device)
     
     #model = rnn_mod(args.model, args.batchsize, args.emsize, args.nhid, args.nlayers, args.dropout, args.tied, use_cudnn_version=args.cudnn, use_adaptive_softmax=args.adaptivesoftmax, cutoffs=args.cutoffs).to(device)
     
