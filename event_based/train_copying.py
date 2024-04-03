@@ -294,7 +294,6 @@ def evaluate_(copy_x, copy_y):
 
 def train(epoch):
     # Turn on training mode which enables dropout.
-    model.train()
     total_loss = 0.
     forward_elapsed_time = 0.
     start_time = time.time()
@@ -304,6 +303,8 @@ def train(epoch):
     num_batches = 200
     calc_mask = False
     for i in range(num_batches):
+        model.train()
+
         batch_ind = random.randint(0, num_batches-1)
 
         #data, targets = get_batch(train_data, i)
@@ -333,7 +334,10 @@ def train(epoch):
         forward_elapsed = time.time() - forward_start_time
         forward_elapsed_time += forward_elapsed
 
-        (loss + extra_loss).backward()
+        if args.algo='blocks'
+            (loss + extra_loss).backward()
+        else:
+            loss.backward()
 
         torch.nn.utils.clip_grad_norm_(model.parameters(), args.clip)
 
