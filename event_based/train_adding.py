@@ -333,7 +333,7 @@ def train(epoch):
             forward_start_time = time.time()
             forward_elapsed_time = 0.
 
-        if batch % args.log_interval == 0 and batch % 5 == 0:
+        if batch % args.log_interval == 0 and batch > 0 and batch % 4 == 0:
             j += 1
             test_loss = evaluate(split="Test")
             val_loss = evaluate(split="Val")
