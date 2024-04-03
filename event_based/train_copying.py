@@ -56,7 +56,7 @@ parser.add_argument('--clip', type=float, default=1.0,
                     help='gradient clipping')
 parser.add_argument('--epochs', type=int, default=200,
                     help='upper epoch limit')
-parser.add_argument('--batch_size', type=int, default=70, metavar='N',
+parser.add_argument('--batch_size', type=int, default=64, metavar='N',
                     help='batch size')
 parser.add_argument('--bptt', type=int, default=100,
                     help='sequence length')
@@ -275,7 +275,7 @@ def evaluate_(copy_x, copy_y):
             #output, hidden,extra_loss = model(data, hidden)
             output, hidden, extra_loss, _, _ = model(data, hidden, calc_mask)
             if not args.adaptivesoftmax:
-                loss = criterion(output.view(-1, ntokens), targets.reshape((args.test_len + 20) * 64))
+                loss = criterion(output.view(-1, ntokens), targets.reshape((args.test_len + 20) * args.batch_size))
             else:
                 raise Exception('not implemented')
                 _, loss = criterion_adaptive(output.view(-1, args.nhid), targets)
@@ -315,7 +315,7 @@ def train(epoch):
 
         output, hidden, extra_loss, masks, sample_masks = model(data, hidden, calc_mask)
         if not args.adaptivesoftmax:
-            loss = criterion(output.view(-1, ntokens), targets.reshape((args.train_len + 20) * 64))
+            loss = criterion(output.view(-1, ntokens), targets.reshape((args.train_len + 20) * args.batch_size))
         else:
             raise Exception('not implemented')
             _, loss = criterion_adaptive(output.view(-1, args.nhid), targets)
