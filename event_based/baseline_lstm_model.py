@@ -7,7 +7,7 @@ class RNNModel(nn.Module):
     """Container module with an encoder, a recurrent module, and a decoder."""
     
     def __init__(self, ntoken, ninp, nhid, nlayers, dropout=0.5, tie_weights=False):
-        super(LSTMModel, self).__init__()
+        super(RNNModel, self).__init__()
         self.drop = nn.Dropout(dropout)
         self.encoder = nn.Embedding(ntoken, ninp)
         self.lstm = nn.LSTM(ninp, nhid, nlayers, dropout=dropout)
