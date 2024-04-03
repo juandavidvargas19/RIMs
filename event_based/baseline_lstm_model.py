@@ -12,8 +12,7 @@ class RNNModel(nn.Module):
         self.drop = nn.Dropout(dropout)
         self.encoder = nn.Embedding(ntoken, ninp)
 
-        lstm_hidden_size = nhid[0] if isinstance(nhid, list) and len(nhid) > 0 else nhid
-        self.lstm = nn.LSTM(ninp, lstm_hidden_size, nlayers, dropout=dropout)
+        self.lstm = nn.LSTM(ninp, nhid[0], nlayers, dropout=dropout)
         
         self.lstm = nn.LSTM(ninp, nhid, nlayers, dropout=dropout)
         self.decoder = nn.Linear(nhid, ntoken)
