@@ -123,17 +123,12 @@ class RNNModel(nn.Module):
             return decoded.view(output.size(0), output.size(1), decoded.size(1)), hidden, 0.0, None, None
 
     def init_hidden(self, bsz):
-        weight = next(self.bc_lst[0].block_lstm.parameters())
-        hidden = []
-        if True or self.rnn_type == 'LSTM' or self.rnn_type == 'LSTMCell':
-            for i in range(self.nlayers):
-                hidden.append((weight.new_zeros(bsz, self.nhid[i]),
-                    weight.new_zeros(bsz, self.nhid[i])))
-            # return (weight.new_zeros(self.nlayers, bsz, self.nhid),
-            #         weight.new_zeros(self.nlayers, bsz, self.nhid))
+        weight = next(self.parameters())
+        if self.rnn_type == 'LSTM' or self.rnn_type == 'LSTMCell':
+            return (weight.new_zeros(self.nlayers, bsz, self.nhid),
+                    weight.new_zeros(self.nlayers, bsz, self.nhid))
         else:
-            for i in range(self.nlayers):
-                hidden.append((weight.new_zeros(bsz, self.nhid[i])))
+            return weight.new_zeros(self.nlayers, bsz, self.nhid)
 
         return hidden
 
