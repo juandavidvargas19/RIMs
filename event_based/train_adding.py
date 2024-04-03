@@ -275,7 +275,7 @@ def train(epoch):
     test_epoch = 0.0
     val_epoch = 0.0
 
-    last_batch=len(train_loader)-1
+    last_batch=len(train_loader)
 
     for batch,(d,t) in enumerate(train_loader):
         hidden = model.init_hidden(args.batch_size)
