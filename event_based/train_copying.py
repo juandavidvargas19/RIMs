@@ -112,9 +112,8 @@ print("Tied?", args.tied)
 
 # Set the random seed manually for reproducibility.
 
-if torch.cuda.is_available():
-    if not args.cuda:
-        print("WARNING: You have a CUDA device, so you should probably run with --cuda")
+
+args.cuda = args.cuda and torch.cuda.is_available()
 
 device = torch.device("cuda" if args.cuda else "cpu")
 
