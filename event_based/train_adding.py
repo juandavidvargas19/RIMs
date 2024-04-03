@@ -275,6 +275,8 @@ def train(epoch):
     test_epoch = 0.0
     val_epoch = 0.0
 
+    last_batch=len(train_loader)-1
+
     for batch,(d,t) in enumerate(train_loader):
         hidden = model.init_hidden(args.batch_size)
         model.train()
@@ -316,7 +318,7 @@ def train(epoch):
 
         optimizer.step()
 
-        if batch % args.log_interval == 0 and batch > 0 and batch % 4 == 0:
+        if batch ==last_batch:
             cur_loss = total_loss / args.log_interval
             elapsed = time.time() - start_time
             printlog = '| epoch {:3d} | {:5d}/{:5d} batches | lr {:02.5f} | ms/batch {:5.2f} | forward ms/batch {:5.2f} | loss {:5.2f} | ppl {:8.2f}'.format(
@@ -333,7 +335,7 @@ def train(epoch):
             forward_start_time = time.time()
             forward_elapsed_time = 0.
 
-        if batch % args.log_interval == 0 and batch > 0 and batch % 4 == 0:
+        if batch ==last_batch:
             j += 1
             test_loss = evaluate(split="Test")
             val_loss = evaluate(split="Val")
