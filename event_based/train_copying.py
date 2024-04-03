@@ -299,8 +299,6 @@ def train(epoch):
     forward_elapsed_time = 0.
     start_time = time.time()
     ntokens = 20#len(corpus.dictionary)
-    hidden = model.init_hidden(args.batch_size)
-
     copy_x, copy_y = copying_data(T=args.train_len)
     eval_copy_x, eval_copy_y = copying_data(T=args.test_len)
     num_batches = 200
@@ -314,8 +312,9 @@ def train(epoch):
 
         if args.cuda:
             torch.cuda.synchronize()
+            
         forward_start_time = time.time()
-        hidden = repackage_hidden(hidden)
+        hidden = model.init_hidden(args.batch_size)
         model.zero_grad()
 
         output, hidden, extra_loss, masks, sample_masks = model(data, hidden, calc_mask)
