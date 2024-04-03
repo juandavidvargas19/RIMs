@@ -172,7 +172,9 @@ if args.algo == "blocks":
                             layer_dilation=args.layer_dilation, num_modules_read_input=args.read_input).to(device)
 elif args.algo == "lstm":
     rnn_mod = baseline_lstm_model.RNNModel
-    model = rnn_mod(args.model, 'LSTM',ntokens, out_dim, args.emsize, args.nhid, args.nlayers, args.dropout, args.tied).to(device)
+    dropout_value = args.dropout[0] if isinstance(args.dropout, list) else args.dropout
+    model = rnn_mod('LSTM', ntokens, args.emsize, args.nhid, args.nlayers, dropout_value, args.tied).to(device)
+    
 else:
     raise Exception("Algorithm option not found")
 
