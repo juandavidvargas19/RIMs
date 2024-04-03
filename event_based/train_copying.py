@@ -318,8 +318,8 @@ def train(epoch):
         model.zero_grad()
 
         output, hidden, extra_loss, masks, sample_masks = model(data, hidden, calc_mask)
-        print(targets.shape)
-        print(output.shape)
+        #print(targets.shape)
+        #print(output.shape)
         if not args.adaptivesoftmax:
             loss = criterion(output.view(-1, ntokens), targets.reshape((args.batch_size) * args.batch_size))
         else:
