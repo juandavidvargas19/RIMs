@@ -280,7 +280,7 @@ def evaluate_(copy_x, copy_y):
             #output, hidden,extra_loss = model(data, hidden)
             output, hidden, extra_loss, _, _ = model(data, hidden, calc_mask)
             if not args.adaptivesoftmax:
-                loss = criterion(output.view(-1, ntokens), targets.reshape((args.test_len +(args.batch_size - args.train_len) * args.batch_size))
+                loss = criterion(output.view(-1, ntokens), targets.reshape((args.test_len +(args.batch_size - args.train_len) * args.batch_size)) ) 
             else:
                 raise Exception('not implemented')
                 _, loss = criterion_adaptive(output.view(-1, args.nhid), targets)
