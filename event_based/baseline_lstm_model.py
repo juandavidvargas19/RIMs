@@ -6,7 +6,7 @@ import torch
 class RNNModel(nn.Module):
     """Container module with an encoder, a recurrent module, and a decoder."""
 
-    def __init__(self, rnn_type, ntoken, ninp, nhid, nlayers, dropout=0.5, tie_weights=False, use_cudnn_version=False,
+    def __init__(self, rnn_type, ntoken, ninp, nhid, nlayers, dropout=0.5, tie_weights=False, use_cudnn_version=True,
                  use_adaptive_softmax=False, discrete_input=True, cutoffs=None):
         super(RNNModel, self).__init__()
         self.use_cudnn_version = use_cudnn_version
