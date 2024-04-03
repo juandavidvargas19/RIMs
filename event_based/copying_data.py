@@ -7,7 +7,7 @@ T = 80
 n_train = 700
 n_test = 700
 n_sequence = 10
-batch_size = 70
+batch_size = 64
 
 
 def copying_data(T=30, n_data=300*batch_size, n_sequence=10, batch_size=batch_size, make_rand=False, shuffle=False, drop_last=False):
