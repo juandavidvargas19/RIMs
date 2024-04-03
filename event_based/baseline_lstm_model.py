@@ -82,6 +82,9 @@ class RNNModel(nn.Module):
 
     def forward(self, input, hidden, calc_mask=False):
 
+        if input.dim() == 2:
+            input = input.unsqueeze(-1)  # Added
+            
         emb1 = self.drop(self.encoder1(input[:,:,0]))
         emb2 = self.drop(self.encoder2(input[:,:,1]))
         emb3 = self.drop(self.encoder3(input[:,:,2]))
