@@ -13,17 +13,17 @@ class RNNModel(nn.Module):
         self.encoder = nn.Embedding(ntoken, ninp)
 
         self.lstm = nn.LSTM(ninp, nhid[0], nlayers, dropout=dropout)        
-        self.decoder = nn.Linear(nhid, ntoken)
+        self.decoder = nn.Linear(nhid[0], ntoken)
 
         # Optionally tie weights as in:
         # "Using the Output Embedding to Improve Language Models" (Press & Wolf 2016)
         if tie_weights:
-            if nhid != ninp:
+            if nhid[0] != ninp:
                 raise ValueError('When using the tied flag, nhid must be equal to emsize')
             self.decoder.weight = self.encoder.weight
 
         self.init_weights()
-        self.nhid = nhid
+        self.nhid = nhid[0]
         self.nlayers = nlayers
 
     def init_weights(self):
